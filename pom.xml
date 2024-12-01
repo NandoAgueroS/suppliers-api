@@ -8,13 +8,18 @@
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.4.0</version>
   </parent>
-  
+
   <groupId>com.mycompany.app</groupId>
   <artifactId>suppliers-app</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>suppliers-app</name>
   <packaging>pom</packaging>
-
+  <modules>
+    <module>microservice-gateway</module>
+    <module>microservice-eureka</module>
+    <module>microservice-config</module>
+    <module>microservice-supplier</module>
+  </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>

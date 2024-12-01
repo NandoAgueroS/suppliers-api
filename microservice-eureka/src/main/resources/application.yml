@@ -1,0 +1,15 @@
+#spring.application.name=microservice-eureka
+server:
+  port: ${EUREKA_PORT}
+spring:
+  application:
+    name: msvc-eureka
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL}
+eureka:
+  instance:
+    hostname: ${HOSTNAME}
+  client:
+    register-with-eureka: false
+  server-url:
+    defautlZone: ${EUREKA_SERVER_URL}
