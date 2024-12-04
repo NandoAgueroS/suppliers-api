@@ -1,11 +1,14 @@
 package com.microservice.supplier.service;
 
+import com.microservice.supplier.error.ResourceNotFoundException;
 import com.microservice.supplier.model.CategoryEntity;
 import com.microservice.supplier.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CategoryServiceImpl implements ICategoryService{
     @Autowired
@@ -16,17 +19,22 @@ public class CategoryServiceImpl implements ICategoryService{
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws ResourceNotFoundException{
+        if (!categoryRepository.findById(id).isPresent()) throw new ResourceNotFoundException("Category not found");
         categoryRepository.deleteById(id);
     }
 
     @Override
-    public CategoryEntity findById(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+    public CategoryEntity findById(Long id) throws ResourceNotFoundException{
+        Optional<CategoryEntity> category = categoryRepository.findById(id);
+        if (!category.isPresent()) throw new ResourceNotFoundException("Category not found");
+        return category.get();
     }
 
     @Override
-    public void update(CategoryEntity updatedCategory) {
+    public void update(Long id, CategoryEntity updatedCategory) throws ResourceNotFoundException{
+        if (!categoryRepository.findById(id).isPresent()) throw new ResourceNotFoundException("Failed to update, category not found");
+        updatedCategory.setCategoryId(id);
         categoryRepository.save(updatedCategory);
     }
 
