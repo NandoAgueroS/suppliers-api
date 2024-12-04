@@ -3,9 +3,10 @@ package com.microservice.supplier.service;
 import com.microservice.supplier.model.CategoryEntity;
 import com.microservice.supplier.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CategoryServiceImpl implements ICategoryService{
     @Autowired
     private ICategoryRepository categoryRepository;
@@ -25,12 +26,23 @@ public class CategoryServiceImpl implements ICategoryService{
     }
 
     @Override
-    public void modify(CategoryEntity modifiedCategory) {
-        categoryRepository.save(modifiedCategory);
+    public void update(CategoryEntity updatedCategory) {
+        categoryRepository.save(updatedCategory);
     }
 
     @Override
     public List<CategoryEntity> findAll() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<CategoryEntity> findCategoriesById(List<Long> categoryIds) {
+        return categoryRepository.findAllById(categoryIds);
+    }
+
+    @Override
+    public boolean doCategoriesExist(List<Long> categoryIds) {
+        List<CategoryEntity> categories = this.findCategoriesById(categoryIds);
+        return categories.size() == categoryIds.size();
     }
 }

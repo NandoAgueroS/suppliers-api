@@ -8,6 +8,8 @@ public interface ICategoryService {
     public void save(CategoryEntity category);
     public void delete(Long id);
     public CategoryEntity findById(Long id);
-    public void modify(CategoryEntity modifiedCategory);
+    public void update(CategoryEntity updatedCategory);
     public List<CategoryEntity> findAll();
+    public List<CategoryEntity> findCategoriesById(List<Long> categoryIds);
+    boolean doCategoriesExist(List<Long> categoryIds);
 }

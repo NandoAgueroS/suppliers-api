@@ -1,15 +1,18 @@
 package com.microservice.supplier.service;
 
+import com.microservice.supplier.dto.SupplierDTO;
+import com.microservice.supplier.error.ResourceNotFoundException;
 import com.microservice.supplier.model.SupplierEntity;
 
 import java.util.List;
 
 public interface ISupplierService {
 
-    public void create(SupplierEntity supplier);
-    public void deleteById(Long id);
-    public SupplierEntity modify(SupplierEntity modifiedSupplier);
-    public SupplierEntity findById(Long id);
-    public List<SupplierEntity> findAll();
-    public List<SupplierEntity> findAllByCategory(Long categoryId);
+    SupplierEntity create(SupplierDTO supplierDTO) throws ResourceNotFoundException;
+    void deleteById(Long id) throws ResourceNotFoundException;
+    SupplierEntity update(Long id, SupplierDTO updatedSupplierDTO) throws ResourceNotFoundException;
+    SupplierEntity findById(Long id) throws ResourceNotFoundException;
+    List<SupplierEntity> findAll();
+    List<SupplierEntity> findAllByCategory(Long categoryId);
+    SupplierEntity mapDtoToEntity(SupplierDTO supplierDTO);
 }

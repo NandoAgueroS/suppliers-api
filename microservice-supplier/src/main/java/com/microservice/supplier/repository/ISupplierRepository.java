@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ISupplierRepository extends JpaRepository<SupplierEntity, Long> {
-    public List<SupplierEntity> findDistinctByCategoriesId(Long categoryId);
+    public List<SupplierEntity> findDistinctByCategoriesCategoryId(Long categoryId);
 }

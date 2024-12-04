@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "category_id")
+    private Long categoryId;
     private String name;
     private String description;
 }
