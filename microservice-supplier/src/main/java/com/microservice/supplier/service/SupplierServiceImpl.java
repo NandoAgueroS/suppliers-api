@@ -84,4 +84,12 @@ public class SupplierServiceImpl implements ISupplierService{
         supplier.setCategories(categories);
         return supplier;
     }
+
+    @Override
+    public SupplierEntity findByUsername(String username) throws ResourceNotFoundException {
+        /*Optional<SupplierEntity> supplier = supplierRepository.findByUsername(username);
+        if (!supplier.isPresent()) throw new ResourceNotFoundException("Supplier Not Found");
+        return supplier.get();*/
+        return supplierRepository.findByUsername(username).orElse(null);
+    }
 }

@@ -1,8 +1,11 @@
 package com.microservice.user.service;
 
+import com.microservice.user.client.SupplierClient;
+import com.microservice.user.dto.SupplierDTO;
 import com.microservice.user.dto.UserDTO;
 import com.microservice.user.error.InvalidArgumentException;
 import com.microservice.user.error.ResourceNotFoundException;
+import com.microservice.user.http.response.UserResponse;
 import com.microservice.user.model.RoleEntity;
 import com.microservice.user.model.UserEntity;
 import com.microservice.user.repository.IUserRepository;
@@ -22,6 +25,9 @@ public class UserServiceImpl implements IUserService{
     @Autowired
     private IRoleService roleService;
 
+    @Autowired
+    private SupplierClient supplierClient;
+
     @Override
     public UserEntity create(UserDTO userDTO) throws InvalidArgumentException {
         UserEntity user = mapDtoToEntity(userDTO);
@@ -30,16 +36,16 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public void delete(Long id) throws ResourceNotFoundException {
-        if (!userRepository.existsById(id)) throw new ResourceNotFoundException("Failed to delete, user not found");
-        userRepository.deleteById(id);
+    public void delete(String username) throws ResourceNotFoundException {
+        if (!userRepository.existsById(username)) throw new ResourceNotFoundException("Failed to delete, user not found");
+        userRepository.deleteById(username);
     }
 
     @Override
-    public UserEntity update(Long id, UserDTO updatedUserDTO) throws ResourceNotFoundException, InvalidArgumentException {
-        if (!userRepository.existsById(id)) throw new ResourceNotFoundException("Failed to update, user not found");
+    public UserEntity update(String username, UserDTO updatedUserDTO) throws ResourceNotFoundException, InvalidArgumentException {
+        if (!userRepository.existsById(username)) throw new ResourceNotFoundException("Failed to update, user not found");
         UserEntity updatedUser = mapDtoToEntity(updatedUserDTO);
-        updatedUser.setUserId(id);
+        updatedUser.setUsername(username);
         userRepository.save(updatedUser);
         return updatedUser;
     }
@@ -50,8 +56,8 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public UserEntity findById(Long id) throws ResourceNotFoundException {
-        Optional<UserEntity> user = userRepository.findById(id);
+    public UserEntity findByUsername(String username) throws ResourceNotFoundException {
+        Optional<UserEntity> user = userRepository.findById(username);
         if (!user.isPresent()) throw new ResourceNotFoundException("User not found");
         return user.get();
     }
@@ -66,5 +72,16 @@ public class UserServiceImpl implements IUserService{
                 .roles(roles)
                 .build();
         return user;
+    }
+
+    @Override
+    public UserResponse getUserProfile(String username) throws ResourceNotFoundException{
+        Optional<UserEntity> userOptional = userRepository.findById(username);
+        if (!userOptional.isPresent()) throw new ResourceNotFoundException("User Not Found");
+        SupplierDTO supplierDTO = supplierClient.findByUsername(userOptional.get().getUsername());
+        return UserResponse.builder()
+                .user(userOptional.get())
+                .supplier(supplierDTO)
+                .build();
     }
 }

@@ -22,6 +22,11 @@ public class SupplierController {
         return ResponseEntity.status(HttpStatus.OK)
                         .body(supplierService.findById(id));
     }
+    @GetMapping("/find-by-username/{username}")
+    public ResponseEntity<?> findByUsername(@PathVariable String username) throws ResourceNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK)
+                        .body(supplierService.findByUsername(username));
+    }
 
     @GetMapping("/findByCategory/{categoryId}")
     public List<SupplierEntity> findByCategory(@PathVariable Long categoryId) {

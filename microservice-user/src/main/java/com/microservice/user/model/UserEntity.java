@@ -19,11 +19,6 @@ import java.util.Set;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)
