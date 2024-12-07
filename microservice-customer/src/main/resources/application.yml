@@ -1,0 +1,24 @@
+#spring.application.name=microservice-customer
+server:
+  port: ${MSVC_CUSTOMER_PORT}
+spring:
+  application:
+    name: msvc-customer
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${CUSTOMER_DB_URL}
+    username: ${CUSTOMER_DB_USERNAME}
+    password: ${CUSTOMER_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL}
+eureka:
+  instance:
+    hostname: ${EUREKA_HOSTNAME}
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL}

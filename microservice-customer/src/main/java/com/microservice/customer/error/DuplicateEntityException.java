@@ -1,0 +1,7 @@
+package com.microservice.customer.error;
+
+public class DuplicateEntityException extends Exception{
+    public DuplicateEntityException(String message) {
+        super(message);
+    }
+}
