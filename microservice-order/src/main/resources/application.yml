@@ -1,0 +1,23 @@
+#spring.application.name=microservice-order
+server:
+  port: ${MSVC_ORDER_PORT}
+spring:
+  application:
+    name: msvc-order
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${ORDER_DB_URL}
+    username: ${ORDER_DB_USERNAME}
+    password: ${ORDER_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL}
+eureka:
+  instance:
+    hostname: ${EUREKA_HOSTNAME}
+  service-url:
+    defaultZone: ${EUREKA_URL}
