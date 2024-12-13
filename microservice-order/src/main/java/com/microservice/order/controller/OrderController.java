@@ -1,6 +1,8 @@
 package com.microservice.order.controller;
 
+import com.microservice.order.error.InvalidArgumentException;
 import com.microservice.order.error.ResourceNotFoundException;
+import com.microservice.order.http.response.OrderResponse;
 import com.microservice.order.model.OrderEntity;
 import com.microservice.order.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class OrderController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<OrderEntity> findById(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<OrderResponse> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(orderService.findById(id));
     }
@@ -46,7 +48,7 @@ public class OrderController {
     }
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderEntity create(@RequestBody OrderEntity order){
+    public OrderEntity create(@RequestBody OrderEntity order) throws InvalidArgumentException {
         orderService.create(order);
         return order;
     }

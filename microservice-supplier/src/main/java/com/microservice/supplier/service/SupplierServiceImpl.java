@@ -92,4 +92,9 @@ public class SupplierServiceImpl implements ISupplierService{
         return supplier.get();*/
         return supplierRepository.findByUsername(username).orElse(null);
     }
+
+    @Override
+    public Boolean existsById(Long id) {
+        return supplierRepository.existsById(id);
+    }
 }

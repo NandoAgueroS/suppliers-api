@@ -16,4 +16,5 @@ public interface ISupplierService {
     List<SupplierEntity> findAllByCategory(Long categoryId);
     SupplierEntity mapDtoToEntity(SupplierDTO supplierDTO);
     SupplierEntity findByUsername(String username)throws ResourceNotFoundException;
+    Boolean existsById(Long id);
 }

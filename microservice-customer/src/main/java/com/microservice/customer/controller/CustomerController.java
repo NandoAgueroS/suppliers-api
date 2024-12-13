@@ -55,4 +55,8 @@ public class CustomerController {
     public void delete(@PathVariable Long id) throws ResourceNotFoundException{
         customerService.deleteById(id);
     }
+    @GetMapping("/exists/{id}")
+    public boolean existsById(@PathVariable Long id){
+        return customerService.existsById(id);
+    }
 }

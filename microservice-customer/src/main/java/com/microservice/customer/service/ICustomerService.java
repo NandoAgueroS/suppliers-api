@@ -12,4 +12,5 @@ public interface ICustomerService {
     CustomerEntity findById(Long id) throws ResourceNotFoundException;
     List<CustomerEntity> findAll();
     CustomerEntity findByUsername(String username);
+    Boolean existsById(Long id);
 }

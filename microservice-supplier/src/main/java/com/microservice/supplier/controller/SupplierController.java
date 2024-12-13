@@ -56,4 +56,8 @@ public class SupplierController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(updatedSupplier);
     }
+    @GetMapping("/exists/{id}")
+    public boolean existsById(@PathVariable Long id){
+        return supplierService.existsById(id);
+    }
 }

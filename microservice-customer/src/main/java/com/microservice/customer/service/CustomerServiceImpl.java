@@ -51,4 +51,9 @@ public class CustomerServiceImpl implements ICustomerService{
         CustomerEntity customer = customerRepository.findByUsername(username).orElse(null);
         return customer;
     }
+
+    @Override
+    public Boolean existsById(Long id) {
+        return customerRepository.existsById(id);
+    }
 }
