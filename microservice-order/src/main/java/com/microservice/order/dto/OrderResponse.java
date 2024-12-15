@@ -1,15 +1,11 @@
-package com.microservice.order.http.response;
+package com.microservice.order.dto;
 
 import com.microservice.order.model.OrderStatus;
 import com.microservice.order.model.Priority;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -3,11 +3,11 @@ package com.microservice.order.model;
 public enum OrderStatus {
     PENDING,
     CONFIRMED,
-    IN_PROGRESS,
+    //IN_PROGRESS,
     SHIPPED,
     CANCELLED,
-    RETURNED,
+    //RETURNED,
     COMPLETED,
-    WAITING_FOR_PAYMENT,
+    //WAITING_FOR_PAYMENT,
     PAID
 }

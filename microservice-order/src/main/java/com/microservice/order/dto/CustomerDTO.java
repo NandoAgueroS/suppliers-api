@@ -1,4 +1,4 @@
-package com.microservice.order.http.response;
+package com.microservice.order.dto;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierDTO {
+public class CustomerDTO {
     private String username;
     private String name;
     private String surname;
     private String address;
     private String email;
-    private String productsDescription;
+    private String companyName;
     private String phone;
 }

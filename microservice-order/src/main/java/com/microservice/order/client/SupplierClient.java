@@ -1,7 +1,6 @@
 package com.microservice.order.client;
 
-import com.microservice.order.http.response.CustomerDTO;
-import com.microservice.order.http.response.SupplierDTO;
+import com.microservice.order.dto.SupplierDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

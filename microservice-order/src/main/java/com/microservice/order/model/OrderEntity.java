@@ -24,6 +24,7 @@ public class OrderEntity {
     private LocalDateTime orderDate;
     private double total;
     @Enumerated(EnumType.STRING)
+    //@Column(columnDefinition = "VARCHAR(255) DEFAULT 'PENDING'")
     private OrderStatus status;
     private String description;
     @Column(name = "due_date")
@@ -34,4 +35,11 @@ public class OrderEntity {
     private Long supplierId;
     @Column(name = "customer_id")
     private Long customerId;
+
+    @PrePersist
+    public void prePersist(){
+        if (this.status == null){
+            this.status = OrderStatus.PENDING;
+        }
+    }
 }
