@@ -11,37 +11,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 public class CustomerController {
 
     @Autowired
     private ICustomerService customerService;
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CustomerEntity> findById(@PathVariable Long id) throws ResourceNotFoundException {
         CustomerEntity customer = customerService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
-    @GetMapping("/find-by-username/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<CustomerEntity> findByUsername(@PathVariable String username){
         CustomerEntity customer = customerService.findByUsername(username);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(customer);
     }
 
-    @GetMapping("/findAll")
+    @GetMapping
     public List<CustomerEntity> findAll(){
         return customerService.findAll();
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public CustomerEntity create(@RequestBody CustomerEntity customer){
         customerService.create(customer);
         return customer;
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CustomerEntity> update(
             @PathVariable Long id,
             @RequestBody CustomerEntity updatedCustomer) throws ResourceNotFoundException{
@@ -50,12 +50,12 @@ public class CustomerController {
                 .body(updatedCustomer);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) throws ResourceNotFoundException{
         customerService.deleteById(id);
     }
-    @GetMapping("/exists/{id}")
+    @GetMapping("/{id}/exists")
     public boolean existsById(@PathVariable Long id){
         return customerService.existsById(id);
     }

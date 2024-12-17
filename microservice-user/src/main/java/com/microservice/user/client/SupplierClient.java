@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "msvc-supplier", url = "localhost:8090/supplier")
+@FeignClient(name = "msvc-supplier", url = "localhost:8080/api/suppliers")
 public interface SupplierClient {
-    @GetMapping("/find-by-username/{username}")
+    @GetMapping("/username/{username}")
     SupplierDTO findByUsername(@PathVariable String username);
 }

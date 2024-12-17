@@ -1,0 +1,13 @@
+##spring.application.name=microservice-config
+server:
+  port: ${MSVC_CONFIGSERVER_PORT}
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          username: ${GIT_USERNAME}
+          password: ${GIT_PASSWORD}
+          uri: ${GIT_CONFIG_URI}

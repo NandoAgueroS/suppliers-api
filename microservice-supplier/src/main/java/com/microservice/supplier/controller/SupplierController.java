@@ -12,51 +12,51 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/supplier")
+@RequestMapping("/api/suppliers")
 public class SupplierController {
     @Autowired
     private ISupplierService supplierService;
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.status(HttpStatus.OK)
                         .body(supplierService.findById(id));
     }
-    @GetMapping("/find-by-username/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<?> findByUsername(@PathVariable String username) throws ResourceNotFoundException {
         return ResponseEntity.status(HttpStatus.OK)
                         .body(supplierService.findByUsername(username));
     }
 
-    @GetMapping("/findByCategory/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public List<SupplierEntity> findByCategory(@PathVariable Long categoryId) {
         return supplierService.findAllByCategory(categoryId);
     }
 
-    @GetMapping("/findAll")
+    @GetMapping
     public List<SupplierEntity> findAll(){
         return supplierService.findAll();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) throws ResourceNotFoundException{
         supplierService.deleteById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<?> save(@RequestBody SupplierDTO supplierDTO) throws ResourceNotFoundException {
         SupplierEntity supplier = supplierService.create(supplierDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(supplier);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> edit(@PathVariable Long id, @RequestBody SupplierDTO updatedSupplierDTO) throws ResourceNotFoundException {
         SupplierEntity updatedSupplier = supplierService.update(id, updatedSupplierDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(updatedSupplier);
     }
-    @GetMapping("/exists/{id}")
+    @GetMapping("/{id}/exists")
     public boolean existsById(@PathVariable Long id){
         return supplierService.existsById(id);
     }

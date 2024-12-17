@@ -12,46 +12,46 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/create")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserEntity save(@RequestBody UserDTO userDTO) throws InvalidArgumentException {
         UserEntity user = userService.create(userDTO);
         return user;
     }
 
-    @GetMapping("/findAll")
+    @GetMapping
     public ResponseEntity<?> findAll(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findAll());
     }
 
-    @GetMapping("/find/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<?> findById(@PathVariable String username) throws ResourceNotFoundException {
         UserEntity user = userService.findByUsername(username);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(user);
     }
-    @GetMapping("/find-details/{username}")
+    @GetMapping("/{username}/details")
     public ResponseEntity<?> findDetailsById(@PathVariable String username) throws ResourceNotFoundException {
         UserResponse user = userService.getUserProfile(username);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(user);
     }
 
-    @PutMapping("/update/{username}")
+    @PutMapping("/{username}")
     public ResponseEntity<?> update(@PathVariable String username, @RequestBody UserDTO updatedUserDTO) throws ResourceNotFoundException, InvalidArgumentException{
         UserEntity updatedUser = userService.update(username, updatedUserDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(updatedUser);
     }
 
-    @DeleteMapping("/delete/{username}")
+    @DeleteMapping("/{username}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable String username) throws ResourceNotFoundException{
         userService.delete(username);

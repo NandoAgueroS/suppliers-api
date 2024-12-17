@@ -5,12 +5,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "msvc-customer", url = "localhost:8085/customers")
+@FeignClient(name = "msvc-customer", url = "localhost:8080/api/customers")
 public interface CustomerClient {
 
-    @GetMapping("/exists/{id}")
+    @GetMapping("/{id}/exists")
     Boolean existsById(@PathVariable Long id);
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     CustomerDTO findById(@PathVariable Long id);
 }
